@@ -1,8 +1,8 @@
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../model/home_menu_item.dart';
 import '../model/introitem.dart';
 const String logo = "assets/smwallet/logo.png";
+
 
 final List<IntroItem> introItems = [
   IntroItem(image: logo,title: "Load Fund", subtitle: "Load funds in your khalti from your Bank account"),

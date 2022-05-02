@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class BottomBarController extends ChangeNotifier {
   final bool snap;
-  final double dragLength;
+  final double? dragLength;
 
   BottomBarController({
-    required TickerProvider vsync,
+     TickerProvider? vsync,
     this.snap: true,
-    required double dragLength,
-  })  : _animationController = AnimationController(vsync: vsync),
+     double? dragLength,
+  })  : _animationController = AnimationController(vsync: vsync!),
         assert(dragLength == null || dragLength > 0),
-        dragLength = dragLength;
+        dragLength = dragLength!;
 
   @Deprecated("use state instead. Will be removed soon")
   Animation<double> get animation =>
@@ -19,11 +19,11 @@ class BottomBarController extends ChangeNotifier {
   Animation<double> get state =>
       _animationController?.view ?? kAlwaysCompleteAnimation;
 
-  final AnimationController _animationController;
+  final AnimationController? _animationController;
 
   void onDrag(DragUpdateDetails details) {
     if (dragLength == null) return;
-    _animationController.value -= details.primaryDelta / (dragLength);
+    _animationController!.value -= details.primaryDelta! / (dragLength!);
   }
 
   void onDragEnd(DragEndDetails details) {
@@ -31,20 +31,20 @@ class BottomBarController extends ChangeNotifier {
     double minFlingVelocity = 365.0;
 
     //let the current animation finish before starting a new one
-    if (_animationController.isAnimating) return;
+    if (_animationController!.isAnimating) return;
 
     //check if the velocity is sufficient to constitute fling
     if (details.velocity.pixelsPerSecond.dy.abs() >= minFlingVelocity) {
       double visualVelocity =
-          -details.velocity.pixelsPerSecond.dy / (dragLength);
+          -details.velocity.pixelsPerSecond.dy / (dragLength!);
 
       if (snap) {
-        _animationController.fling(velocity: visualVelocity);
+        _animationController!.fling(velocity: visualVelocity);
       } else {
         // actual scroll physics will be implemented in a future release
-        _animationController.animateTo(
-          _animationController.value + visualVelocity * 0.16,
-          duration: Duration(milliseconds: 410),
+        _animationController!.animateTo(
+          _animationController!.value + visualVelocity * 0.16,
+          duration: const Duration(milliseconds: 410),
           curve: Curves.decelerate,
         );
       }
@@ -53,45 +53,49 @@ class BottomBarController extends ChangeNotifier {
 
     // check if the controller is already halfway there
     if (snap) {
-      if (_animationController.value > 0.5)
+      if (_animationController!.value > 0.5) {
         open();
-      else
+      } else {
         close();
+      }
     }
   }
 
   //close the panel
   void close() {
-    _animationController.fling(velocity: -1.0);
+    _animationController!.fling(velocity: -1.0);
   }
 
   void swap() {
-    if (_animationController.value == 1)
+    if (_animationController!.value == 1) {
       close();
-    else if (_animationController.value == 0) open();
+    } else if (_animationController!.value == 0) {
+      open();
+    }
   }
 
   //open the panel
   void open() {
-    _animationController.fling(velocity: 1.0);
+    _animationController!.fling(velocity: 1.0);
   }
 
   bool isOpen() {
-    return _animationController.value == 1;
+    return _animationController!.value == 1;
   }
 }
 
 class DefaultBottomBarController extends StatefulWidget {
   final Widget child;
 
-  DefaultBottomBarController({
+  const DefaultBottomBarController({
     Key? key,
     required this.child,
   }) : super(key: key);
 
-  static BottomBarController of(BuildContext context) {
-    final _BottomBarControllerScope scope =
-        context.inheritFromWidgetOfExactType(_BottomBarControllerScope);
+  static BottomBarController? of(BuildContext context) {
+    final _BottomBarControllerScope? scope =
+        context.dependOnInheritedWidgetOfExactType<_BottomBarControllerScope>();
+        // context.dependOnInheritedElement(_BottomBarControllerScope);
     return scope?.controller;
   }
 
@@ -102,12 +106,12 @@ class DefaultBottomBarController extends StatefulWidget {
 
 class _DefaultBottomBarControllerState extends State<DefaultBottomBarController>
     with SingleTickerProviderStateMixin {
-  lateBottomBarController _controller;
+  late BottomBarController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = BottomBarController(vsync: this);
+    _controller = BottomBarController();
   }
 
   @override

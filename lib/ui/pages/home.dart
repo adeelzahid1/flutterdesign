@@ -14,12 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
- // late BottomBarController controller;
+  late BottomBarController controller;
 
   @override
     void initState() {
       super.initState();
-     // controller = BottomBarController(vsync: this, dragLength: 550, snap: true);
+      controller = BottomBarController(vsync: this, dragLength: 550, snap: true);
     }
 
   @override
@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
       ),
       bottomNavigationBar: GestureDetector(
-        // onVerticalDragUpdate: controller.onDrag,
-        // onVerticalDragEnd: controller.onDragEnd,
-        // child: _buildBottomBar(context),
+        onVerticalDragUpdate: controller.onDrag,
+        onVerticalDragEnd: controller.onDragEnd,
+        child: _buildBottomBar(context),
       ),
     );
   }
@@ -91,52 +91,52 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         );
   }
 
-  // BottomExpandableAppBar _buildBottomBar(BuildContext context) {
-  //   return BottomExpandableAppBar(
-  //     attachSide: Side.Top,
-  //     controller: controller,
-  //     expandedHeight: MediaQuery.of(context).size.height - 75,
-  //     horizontalMargin: 0,
-  //     appBarHeight: 50,
-  //     bottomOffset: 0,
-  //     expandedBackColor: Colors.white,
-  //     expandedBody: MenuPage(),
-  //     bottomAppBarColor: Colors.grey.shade200,
-  //     bottomAppBarBody: Row(
-  //       mainAxisSize: MainAxisSize.max,
-  //       children: <Widget>[
-  //         Expanded(
-  //           child: _buildBottomMenuItem(
-  //             icon: Icon(Icons.home),
-  //             label: "Home",
-  //             onTap: (){}
-  //           ),
-  //         ),
-  //         Expanded(
-  //           child: _buildBottomMenuItem(
-  //             icon: Icon(Icons.card_giftcard),
-  //             label: "Bazaar",
-  //             onTap: (){}
-  //           ),
-  //         ),
-  //         Expanded(
-  //           child: _buildBottomMenuItem(
-  //             icon: Icon(Icons.list),
-  //             label: "Transactions",
-  //             onTap: (){}
-  //           ),
-  //         ),
-  //         Expanded(
-  //           child: _buildBottomMenuItem(
-  //             icon: Icon(Icons.more_horiz),
-  //             label: "More",
-  //             onTap: () => controller.open()
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  BottomExpandableAppBar _buildBottomBar(BuildContext context) {
+    return BottomExpandableAppBar(
+      attachSide: Side.Top,
+      controller: controller,
+      expandedHeight: MediaQuery.of(context).size.height - 75,
+      horizontalMargin: 0,
+      appBarHeight: 50,
+      bottomOffset: 0,
+      expandedBackColor: Colors.white,
+      expandedBody: MenuPage(),
+      bottomAppBarColor: Colors.grey.shade200,
+      bottomAppBarBody: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Expanded(
+            child: _buildBottomMenuItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+              onTap: (){}
+            ),
+          ),
+          Expanded(
+            child: _buildBottomMenuItem(
+              icon: Icon(Icons.card_giftcard),
+              label: "Bazaar",
+              onTap: (){}
+            ),
+          ),
+          Expanded(
+            child: _buildBottomMenuItem(
+              icon: Icon(Icons.list),
+              label: "Transactions",
+              onTap: (){}
+            ),
+          ),
+          Expanded(
+            child: _buildBottomMenuItem(
+              icon: Icon(Icons.more_horiz),
+              label: "More",
+              onTap: () => controller.open()
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   MaterialButton _buildBottomMenuItem({required Widget icon, required String label, Function? onTap}) {
     return MaterialButton(

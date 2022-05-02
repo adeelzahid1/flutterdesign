@@ -1,7 +1,4 @@
-/**
- * Author: Damodar Lohani
- * profile: https://github.com/lohanidamodar
-  */
+
 import 'package:flutter/material.dart';
 import '../../../res/colors.dart';
 import '../../../res/constants.dart';

@@ -1,13 +1,12 @@
-/**
- * Author: Damodar Lohani
- * profile: https://github.com/lohanidamodar
-  */
+
 import 'package:flutter/material.dart';
 import '../../../res/colors.dart';
 import '../../../res/constants.dart';
 import '../../../res/typography.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +28,9 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Row(
-                      children: <Widget>[
+                      children: const <Widget>[
                         Icon(Icons.perm_contact_calendar),
-                        const SizedBox(width: 10.0),
+                        SizedBox(width: 10.0),
                         Expanded(
                           child: TextField(
                             decoration:
@@ -43,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(height: 20.0),
                     Row(
                       children: <Widget>[
-                        Icon(Icons.lock),
+                        const Icon(Icons.lock),
                         const SizedBox(width: 10.0),
                         Expanded(
                           child: TextField(

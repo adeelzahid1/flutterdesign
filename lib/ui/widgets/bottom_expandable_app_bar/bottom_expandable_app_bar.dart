@@ -64,7 +64,7 @@ class _BottomExpandableAppBarState extends State<BottomExpandableAppBar> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _updateBarController();
-    panelState = _controller?.state?.value ?? panelState;
+    panelState = _controller.state.value ;
   }
 
   @override
@@ -83,8 +83,7 @@ class _BottomExpandableAppBarState extends State<BottomExpandableAppBar> {
   }
 
   void _updateBarController() {
-    final BottomBarController newController =
-        widget.controller ?? DefaultBottomBarController.of(context);
+    final BottomBarController newController = widget.controller ?? DefaultBottomBarController.of(context)!;
     assert(() {
       if (newController == null) {
         throw FlutterError('No BottomBarController for ${widget.runtimeType}.\n'
@@ -125,7 +124,7 @@ class _BottomExpandableAppBarState extends State<BottomExpandableAppBar> {
         children: <Widget>[
           Padding(
             padding:
-                EdgeInsets.symmetric(horizontal: widget.horizontalMargin ?? 0),
+                EdgeInsets.symmetric(horizontal: widget.horizontalMargin),
             child: Stack(
               children: [
                 Container(

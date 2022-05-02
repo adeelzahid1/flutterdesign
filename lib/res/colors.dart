@@ -1,7 +1,4 @@
-/**
- * Author: Damodar Lohani
- * profile: https://github.com/lohanidamodar
-  */
+
 import 'package:flutter/material.dart';
 const Color primary = Color(0xff5C2B90);
 const Color accent = Color(0xffF8A417);
