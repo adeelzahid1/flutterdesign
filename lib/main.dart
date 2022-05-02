@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/ui/pages/auth/login.dart';
+import 'package:flutterui/ui/pages/auth/recover.dart';
+import 'package:flutterui/ui/pages/auth/register.dart';
+import 'package:flutterui/ui/pages/home.dart';
+import 'package:flutterui/ui/pages/intro.dart';
+import 'package:flutterui/ui/pages/payment.dart';
+import 'package:flutterui/ui/widgets/slide_right_route.dart';
 import 'res/colors.dart';
 
 
@@ -32,18 +39,18 @@ class KhaltiApp extends StatelessWidget {
       color: primary,
       theme: ThemeData(primaryColor: primary, accentColor: accent),
       routes: {
-        // "/": (_) => IntroPage(),
-        // "home": (_) => HomePage(),
-        // "payment": (_) => Payment(),
+        "/": (_) => IntroPage(),
+        "home": (_) => HomePage(),
+        "payment": (_) => Payment(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch(settings.name) {
-          // case "login":
-          //   return SlideRightRoute(widget: LoginPage());
-          // case "recover":
-          //   return SlideRightRoute(widget: RecoverPasswordPage());
-          // case "register":
-          //   return SlideRightRoute(widget: RegisterPage());
+          case "login":
+            return SlideRightRoute(widget: LoginPage());
+          case "recover":
+            return SlideRightRoute(widget: RecoverPasswordPage());
+          case "register":
+            return SlideRightRoute(widget: RegisterPage());
           default:
             return null;
         }
